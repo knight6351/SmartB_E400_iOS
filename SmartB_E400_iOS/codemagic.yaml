@@ -1,0 +1,10 @@
+workflows:
+  ios-build:
+    name: iOS Build Workflow
+    environment:
+      xcode: latest
+    scripts:
+      - name: 列出 Xcode 設定
+        script: xcodebuild -list 
+      - name: 嘗試編譯 iOS 專案
+        script: xcodebuild -scheme "SmartB_E400_iOS" build
