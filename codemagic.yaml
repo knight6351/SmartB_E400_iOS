@@ -1,0 +1,20 @@
+workflows:
+  ios-workflow:
+    name: iOS Build
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      vars:
+        XCODE_WORKSPACE: "MyApp.xcworkspace"
+        XCODE_SCHEME: "MyApp"
+      ios_signing:
+        distribution_type: app_store
+    scripts:
+      - name: Install dependencies
+        script: |
+          pod install
+      - name: Build app
+        script: |
+          xcodebuild -workspace $XCODE_WORKSPACE -scheme $XCODE_SCHEME clean build
+    artifacts:
+      - build/ios/ipa/*.ipa
